@@ -1,28 +1,13 @@
-יומן פגישות פרויקט גמר
-  
-14/09/2023 |	בחירת פרויקט נושא ומנחה
+# Final Project Meeting Diary
 
-15/01/2024 |	פגישה עם המנחה ועדכונו על ההתקדמות בפרויקט
-
-21/01/2024 |    פגישה עם המנחה ועדכונו על ההתקדמות בפרויקט
-
-28/01/2024 |	פגישה עם המנחה ועדכונו על ההתקדמות בפרויקט
-
-04/02/2024 |	פגישה עם המנחה ועדכונו על ההתקדמות בפרויקט
-
-11/02/2024 |	הגשת דו"ח הצעה
-# Meeting Diary
-
-| Meeting Date | Meeting Topic             | 
-|--------------|---------------------------|
-| 14/09/2023   | Choosing a project.       |
-|              |                           |
-| 15/01/2024   | update  progress of project|    
-                                                              
-| 21/01/2024   |                           | 
-| 28/01/2024   |                           | 
-| 11/02/2024   | Submitting a proposal     |
-|              | report.                   |
-|              |                           | 
-|              |                           |
-|              |                           |
+| Meeting Date | Meeting Topic                                      | Meeting Notes |
+|--------------|----------------------------------------------------|---------------|
+| 09/14/2023   | Choosing a project topic and supervisor            |               |
+| 01/15/2024   | A meeting with the supervisor and project update   |               |
+| 01/21/2024   | A meeting with the supervisor and project update   |               |
+| 01/28/2024   | A meeting with the supervisor and project update   |               |
+| 02/04/2024   | A meeting with the supervisor and project update   |               |
+| 02/11/2024   | Submitting a proposal report                       |               |
+| 02/18/2024   | A meeting with the supervisor and project update   |               |
+| 03/03/2024   | A meeting with the supervisor and project update   |               |
+| 03/17/2024   | A meeting with the supervisor and project update   |               |
