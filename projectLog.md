@@ -17,9 +17,8 @@
 |--------------|---------------------------|
 | 14/09/2023   | Choosing a project.       |
 |              |                           |
-| 15/01/2024   | update on the progress    |    
-|              |   of the project.         | 
-|              |                           | 
+| 15/01/2024   | update  progress of project|    
+                                                              
 | 21/01/2024   |                           | 
 | 28/01/2024   |                           | 
 | 11/02/2024   | Submitting a proposal     |
