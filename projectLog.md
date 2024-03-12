@@ -13,13 +13,17 @@
 11/02/2024 |	הגשת דו"ח הצעה
 # Meeting Diary
 
-| Meeting Date | Meeting Topic             | Meeting Notes |
-|--------------|---------------------------|---------------|
-| 14/09/2023   | Choosing a project        |               |
-| 15/01/2024   |                           | - [Note 2]    |
-| 21/01/2024   |                           | - [Note 3]    |
-| 28/01/2024   |                           | ...           |
-| 11/02/2024   | [Topic]                   | - [Note 1]    |
-|              |                           | - [Note 2]    |
-|              |                           | - [Note 3]    |
-|              |                           |               |
+| Meeting Date | Meeting Topic             | 
+|--------------|---------------------------|
+| 14/09/2023   | Choosing a project.       |
+|              |                           |
+| 15/01/2024   | update on the progress    |    
+|              |   of the project.         | 
+|              |                           | 
+| 21/01/2024   |                           | 
+| 28/01/2024   |                           | 
+| 11/02/2024   | Submitting a proposal     |
+|              | report.                   |
+|              |                           | 
+|              |                           |
+|              |                           |
