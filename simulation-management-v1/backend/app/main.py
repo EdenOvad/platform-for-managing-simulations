@@ -1,19 +1,26 @@
-from fastapi import FastAPI
-from models.simulation import Simulation
-from models.user import User
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
-from utils.database import get_mongo_client
+import os
+import uvicorn
+import bcrypt
+from routers.routers import api_router
 
 app = FastAPI()
 
-client = get_mongo_client()
-db = client["simulation_management_db"]
-simulations_collection = db["simulations"]
-users_collection=db["users"]
+origins = [
+    "http://localhost:3000",
+]
 
-@app.get("/")
-async def read_root():
-    return {"message": "Niv kelman and Eden Ovad test"}
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+app.include_router(api_router)
 
-
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
