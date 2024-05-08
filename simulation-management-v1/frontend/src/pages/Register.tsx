@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useRegisterUserMutation } from '../redux/api/authAPI';
 import { RegisterUserRequest } from '../redux/api/types';
+import axios from 'axios';
 
 const Register = () => {
     const {
@@ -19,8 +20,19 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const onSubmit = (data: RegisterUserRequest) => {
-        registerUser(data);
+    const onSubmit = async (data: RegisterUserRequest) => {
+        await axios.post("http://localhost:8000/api/register", data)
+            .then(res => {
+                if (res.data === "User is already registered!") {
+                    alert(res.data)
+                } else {
+                    alert(res.data)
+                    navigate('/')
+                }
+                console.log(res.data);
+            })
+            .catch(err => console.log(err.response.data));
+        // registerUser(data);
     };
 
     useEffect(() => {
@@ -34,7 +46,7 @@ const Register = () => {
                     position: 'top-right'
                 }
             );
-            navigate('/login');
+            navigate('/');
         }
 
         if (isError && error) {
@@ -107,7 +119,7 @@ const Register = () => {
                             </div>
                             <div className="mt-4 d-flex justify-content-center">
                                 <p>
-                                    <Link to="/login" className="primary-link">
+                                    <Link to="/" className="primary-link">
                                         <span>Login</span>
                                     </Link>{' '}
                                 </p>
