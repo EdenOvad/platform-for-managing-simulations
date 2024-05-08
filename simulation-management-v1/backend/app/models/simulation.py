@@ -1,5 +1,8 @@
 from pydantic import BaseModel
 
+# class main simulation
+
+
 class Simulation(BaseModel):
     simulation_name: str
     user_id: str
