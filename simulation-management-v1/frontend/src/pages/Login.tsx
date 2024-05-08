@@ -4,11 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import classnames from 'classnames';
 import logo1Img from '../assets/images/logo-1.png';
 import toast from 'react-hot-toast';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { X } from 'react-feather';
-import { useLoginUserMutation } from '../redux/api/authAPI';
-import { getUserData } from '../utils/Utils';
 import { LoginUserRequest } from '../redux/api/types';
+import axios from 'axios';
+import { login } from '../redux/action/action';
+import { jwtDecode } from 'jwt-decode'
+
+interface DecodedToken {
+    user_id: string;
+}
 
 const Login = () => {
     const {
@@ -17,28 +23,52 @@ const Login = () => {
         formState: { errors }
     } = useForm<LoginUserRequest>();
 
-    const [loginUser, { isLoading, isError, error, isSuccess }] = useLoginUserMutation();
+    const [isSuccess, setIssuccess] = useState(false)
+    const [isError, setError] = useState("")
+    const [uId, setUid] = useState("")
 
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
-    const onSubmit = (data: LoginUserRequest) => {
-        loginUser(data);
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            dispatch(login(localStorage.getItem("token")))
+            navigate("/simulation")
+        }
+    })
+
+
+    const onSubmit = async (data: LoginUserRequest) => {
+        await axios.post("http://localhost:8000/api/login", data)
+            .then(res => {
+                dispatch(login(res.data))
+                const decodedToken: DecodedToken = jwtDecode(String(res.data))
+                const uid: string = decodedToken.user_id
+                setUid(uid)
+                setIssuccess(true)
+                // loginUser()
+            })
+            .catch(err => {
+                alert(err.response.data.detail)
+            });
+        // loginUser(data);
     };
 
     useEffect(() => {
-        if (isSuccess) {
-            const user = getUserData();
-            const userInfo = JSON.parse(user);
-            console.log(userInfo);
+        if (isSuccess == true) {
+
+            // const user = getUserData();
+            // const userInfo = JSON.parse(user);
+            // console.log(userInfo);
             toast(
                 (t) => (
                     <div className="d-flex">
                         <div className="d-flex flex-column">
                             <div className="d-flex justify-content-between">
-                                <h6>{userInfo.firstName}</h6>
+                                {/* <h6>{userInfo.username}</h6> */}
                                 <X size={12} className="cursor-pointer" onClick={() => toast.dismiss(t.id)} />
                             </div>
-                            <span className="small">You have successfully logged in as an {userInfo.role} user. Enjoy!</span>
+                            <span className="small">You have successfully logged in as an user. Enjoy!</span>
                         </div>
                     </div>
                 ),
@@ -47,17 +77,13 @@ const Login = () => {
                     position: 'top-right'
                 }
             );
-            navigate('/');
+            navigate('/simulation', { state: uId });
         }
 
-        if (isError && error) {
-            let errorMessage = (error as any).data.message;
-            if (typeof errorMessage !== 'string') {
-                errorMessage = 'An error occurred while logging in.';
-            }
+        if (isError) {
             toast.error(
                 <div className="d-flex align-items-center">
-                    <span className="toast-title">{errorMessage}</span>
+                    <span className="toast-title">{isError}</span>
                 </div>,
                 {
                     duration: 4000,
@@ -65,7 +91,7 @@ const Login = () => {
                 }
             );
         }
-    }, [error, isError, isLoading, isSuccess, navigate]);
+    }, [isError, isSuccess, navigate]);
 
     return (
         <div className="auth-wrapper auth-v1 px-2 auth-background">
@@ -110,7 +136,7 @@ const Login = () => {
                             </div>
                             <div className="mt-4 d-flex justify-content-center">
                                 <p>
-                                    Not a member?  
+                                    Not a member?
                                     <Link to="/register" className="primary-link">
                                         <span>Register</span>
                                     </Link>{' '}
