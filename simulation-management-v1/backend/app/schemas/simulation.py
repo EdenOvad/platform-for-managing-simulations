@@ -29,8 +29,7 @@ async def popSimulation(data: str):
 
 
 async def update_simulation_db(data: object, simulation_id: str, user_id: str):
-    print(data['num_jobs'])
-    result = await simulations_collection.find_one_and_update({"user_id": user_id, "_id": ObjectId(simulation_id)}, {"$set": {"params": str(data['num_jobs'])+','+str(data['ring_size'])+','+str(data['routing']), "simulation_name": data['simulation_name']}})
+    result = await simulations_collection.find_one_and_update({"user_id": user_id, "_id": ObjectId(simulation_id)}, {"$set": {"params": str(data['params']), "result": str(data['result']), "simulation_name": data['simulation_name']}})
     return result
 
 
