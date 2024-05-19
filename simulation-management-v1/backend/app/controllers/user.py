@@ -37,5 +37,6 @@ async def authUser(request: Request):
 @router.post("/register")
 async def register(request: Request):
     user = await request.json()
+    print(user)
     result = await save_user(user)
     return result
