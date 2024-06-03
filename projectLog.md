@@ -15,3 +15,6 @@
 | 09/04/2024   | Meeting with the supervisor and updating him on the progress of the project   |
 | 16/04/2024   | Submitting a alpha report                                                     |
 | 08/05/2024   | Requirements for the second semester                                          |
+| 15/05/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 22/05/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+
