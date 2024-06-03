@@ -58,6 +58,7 @@ const Dashboard = () => {
             path: ""
         })
     };
+    //close simulation
     const handleClose1 = () => {
         setShow1({ "modal": false })
         setParams({
