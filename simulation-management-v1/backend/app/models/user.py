@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-# class main for username
+# class main for username login and register
 
 
 class User(BaseModel):

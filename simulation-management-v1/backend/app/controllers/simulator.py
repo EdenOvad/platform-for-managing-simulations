@@ -46,6 +46,7 @@ async def run_simulation(request: Request):
         routing=payload_data.routing,
         seed=seed
     )
+    # check if parameters allow
     print(result)
     if result == "You can`t create simulation with your parameters":
         print(result)
@@ -94,13 +95,6 @@ async def run_simulation(request: Request):
     return {"data": simulations1, "progress": result, "tempID": payload["params"]["tempID"]}
 
 
-@router.post("/get_simulate_flood_dns")
-async def get_simulation(request: Request):
-    user_id = await request.json()
-    simulations1 = await popSimulation(user_id['state'])
-    return simulations1
-
-
 @router.post("/re_run_simulation")
 async def re_run_simulation(request: Request):
     params = await request.json()
@@ -112,12 +106,10 @@ async def re_run_simulation(request: Request):
     return output
 
 
-@router.post("/delte_simulation")
-async def delte_simulation(request: Request):
-    params = await request.json()
-    payload = params['data']
-    await deleteSimulation({"_id": ObjectId(payload)})
-    simulations1 = await popSimulation(str(params['user_id']))
+@router.post("/get_simulate_flood_dns")
+async def get_simulation(request: Request):
+    user_id = await request.json()
+    simulations1 = await popSimulation(user_id['state'])
     return simulations1
 
 
@@ -197,6 +189,15 @@ async def update_simulation(request: Request):
     }
     await update_simulation_db(simulation, payload['simulationID'], payload["user_id"])
     simulations1 = await popSimulation(str(payload['user_id']))
+    return simulations1
+
+
+@router.post("/delte_simulation")
+async def delte_simulation(request: Request):
+    params = await request.json()
+    payload = params['data']
+    await deleteSimulation({"_id": ObjectId(payload)})
+    simulations1 = await popSimulation(str(params['user_id']))
     return simulations1
 
 
