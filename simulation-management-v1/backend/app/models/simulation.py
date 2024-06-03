@@ -3,6 +3,7 @@ from pydantic import BaseModel, create_model
 
 class TemporyPayload(BaseModel):
     simulation_name: str
+    seed_number: int
     num_jobs: int
     num_tors: int
     num_cores: int
@@ -18,6 +19,7 @@ class User(BaseModel):
 
 class SimulationPayload(BaseModel):
     simulation_name: str
+    seed_number: int
     num_jobs: int
     num_tors: int
     num_cores: int
