@@ -6,9 +6,18 @@ import time
 from decouple import config
 
 router = APIRouter()
-
 JWT_SECRET = config("secret", default="default_secret_value")
 JWT_ALGORITHM = config("algorithm", default="HS256")
+
+
+@router.post("/register")
+async def register(request: Request):
+    user = await request.json()
+    print(user)
+    result = await save_user(user)
+    return result
+
+# login post request
 
 
 @router.post("/login")
@@ -32,11 +41,3 @@ async def authUser(request: Request):
             raise HTTPException(status_code=400, detail="Password error")
     else:
         raise HTTPException(status_code=400, detail="User not registered")
-
-
-@router.post("/register")
-async def register(request: Request):
-    user = await request.json()
-    print(user)
-    result = await save_user(user)
-    return result
