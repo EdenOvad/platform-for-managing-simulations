@@ -95,24 +95,6 @@ async def run_simulation(request: Request):
     return {"data": simulations1, "progress": result, "tempID": payload["params"]["tempID"]}
 
 
-@router.post("/re_run_simulation")
-async def re_run_simulation(request: Request):
-    params = await request.json()
-    payload = params['data']
-    process = subprocess.Popen(["java", "-jar", "./flooddns/floodns-basic-sim.jar",
-                               payload], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    output, _ = process.communicate()
-    output = output.decode('utf-8')
-    return output
-
-
-@router.post("/get_simulate_flood_dns")
-async def get_simulation(request: Request):
-    user_id = await request.json()
-    simulations1 = await popSimulation(user_id['state'])
-    return simulations1
-
-
 @router.post("/simulation_update")
 async def update_simulation(request: Request):
     payload = await request.json()
@@ -189,6 +171,24 @@ async def update_simulation(request: Request):
     }
     await update_simulation_db(simulation, payload['simulationID'], payload["user_id"])
     simulations1 = await popSimulation(str(payload['user_id']))
+    return simulations1
+
+
+@router.post("/re_run_simulation")
+async def re_run_simulation(request: Request):
+    params = await request.json()
+    payload = params['data']
+    process = subprocess.Popen(["java", "-jar", "./flooddns/floodns-basic-sim.jar",
+                               payload], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, _ = process.communicate()
+    output = output.decode('utf-8')
+    return output
+
+
+@router.post("/get_simulate_flood_dns")
+async def get_simulation(request: Request):
+    user_id = await request.json()
+    simulations1 = await popSimulation(user_id['state'])
     return simulations1
 
 
