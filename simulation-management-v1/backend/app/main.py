@@ -1,9 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import HTTPException
-import os
 import uvicorn
-import bcrypt
 from routers.routers import api_router
 
 app = FastAPI()
@@ -11,7 +9,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
 ]
-
+# allow all methods and headers to request
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
