@@ -25,10 +25,6 @@ interface Simulation {
     result: string
 }
 
-// interface Edit{
-//     num_jors
-// }
-
 const Dashboard = () => {
     const paginationRowsPerPageOptions = [15, 30, 50, 100];
     const [simulations, setSimulations] = useState<Simulation[]>([]);
@@ -135,38 +131,6 @@ const Dashboard = () => {
         }
     }
 
-    const handlePathSimulation = async (data: Simulation) => {
-        console.log(data);
-
-        setSimulationsId(data.simulation_id)
-        setStatus(true)
-        setShow1({ "modal": true })
-        const updatedata = data.parameters.split(',')
-        const newdata = {
-            params: data.parameters,
-            simulation_name: data.simulation_name,
-            num_tors: parseInt(updatedata[0]), // Assuming the first part is num_tors
-            num_cores: parseInt(updatedata[1]), // Assuming the second part is num_cores
-            ring_size: parseInt(updatedata[2]), // Assuming the second part is num_cores
-            path: data.path
-        }
-        console.log(updatedata);
-        const changedata = (data: { params: string, simulation_name: string, ring_size: number, num_cores: number, path: string }) => {
-
-            setParams({
-                ...params,
-                simulation_name: data.simulation_name,
-                num_jobs: updatedata[0],
-                num_tors: "32",
-                num_cores: updatedata[1],
-                ring_size: updatedata[2],
-                routing: updatedata[3],
-                path: ""
-            })
-        }
-        changedata(newdata)
-    }
-
     const createSimulation = async (data: string) => {
         if (data == "create") {
             setStatus(true)
@@ -208,6 +172,40 @@ const Dashboard = () => {
             console.error('Error creating simulation:', error);
         }
     };
+
+    const handlePathSimulation = async (data: Simulation) => {
+        console.log(data);
+
+        setSimulationsId(data.simulation_id)
+        setStatus(true)
+        setShow1({ "modal": true })
+        const updatedata = data.parameters.split(',')
+        const newdata = {
+            params: data.parameters,
+            simulation_name: data.simulation_name,
+            num_tors: parseInt(updatedata[0]), // Assuming the first part is num_tors
+            num_cores: parseInt(updatedata[1]), // Assuming the second part is num_cores
+            ring_size: parseInt(updatedata[2]), // Assuming the second part is num_cores
+            path: data.path
+        }
+        console.log(updatedata);
+        const changedata = (data: { params: string, simulation_name: string, ring_size: number, num_cores: number, path: string }) => {
+
+            setParams({
+                ...params,
+                simulation_name: data.simulation_name,
+                num_jobs: updatedata[0],
+                num_tors: "32",
+                num_cores: updatedata[1],
+                ring_size: updatedata[2],
+                routing: updatedata[3],
+                path: ""
+            })
+        }
+        changedata(newdata)
+    }
+
+
 
     const filterText = (event: ChangeEvent<HTMLInputElement>): void => {
         const searchText = event.target.value.toLowerCase()
