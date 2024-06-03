@@ -1,2 +1,2 @@
-#add env to gitignore
+#add env to gitignore (database url)
 .env
