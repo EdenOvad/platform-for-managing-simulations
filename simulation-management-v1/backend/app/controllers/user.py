@@ -24,6 +24,7 @@ async def register(request: Request):
 async def authUser(request: Request):
     user = await request.json()
     result = await get_user(user["username"])
+    # make the password hard to get with utf-9 jwt algorithem encode
     password = user['password'].encode('utf-8')
     if result:
         if bcrypt.checkpw(password, result["password"]):
