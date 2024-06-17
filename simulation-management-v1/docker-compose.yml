@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: my_mongodb_container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: edenovad
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
