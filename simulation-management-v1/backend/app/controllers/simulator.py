@@ -119,6 +119,7 @@ async def update_simulation(request: Request):
         path=payload['params']['path'],
         seed=seed
     )
+    # send to object the main function with the parameters
     result = await local_run(
         num_jobs=payload_data.num_jobs,
         num_tors=payload_data.num_tors,
@@ -127,6 +128,7 @@ async def update_simulation(request: Request):
         routing=payload_data.routing,
         seed=seed
     )
+    # check if result
     print(result)
     if (result == "You can`t create simulation with your parameters"):
         current_date = datetime.today().strftime('%Y-%m-%d')
