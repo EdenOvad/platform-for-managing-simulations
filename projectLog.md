@@ -17,4 +17,9 @@
 | 08/05/2024   | Requirements for the second semester                                          |
 | 15/05/2024   | Meeting with the supervisor and updating him on the progress of the project   |
 | 22/05/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 05/06/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 12/06/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 19/06/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 26/06/2024   | Meeting with the supervisor and updating him on the progress of the project   |
+| 03/07/2024   | Meeting with the supervisor and updating him on the progress of the project   |
 
