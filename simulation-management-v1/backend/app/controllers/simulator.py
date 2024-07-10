@@ -17,7 +17,6 @@ router = APIRouter()
 @router.post("/simulate_flood_dns")
 async def run_simulation(request: Request):
     payload = await request.json()
-    seed = random.choice([0, 42, 200, 404, 1234])
     payload_data = SimulationPayload(
         simulation_name=payload['params']['simulation_name'],
         num_jobs=payload['params']['num_jobs'],
@@ -26,7 +25,7 @@ async def run_simulation(request: Request):
         ring_size=payload['params']['ring_size'],
         routing=payload['params']['routing'],
         path=payload['params']['path'],
-        seed=seed
+        seed=payload['params']['seed']
     )
     simulation_data = TemporyPayload(
         simulation_name=payload['params']['simulation_name'],
@@ -36,16 +35,19 @@ async def run_simulation(request: Request):
         ring_size=payload['params']['ring_size'],
         routing=payload['params']['routing'],
         path=payload['params']['path'],
-        seed=seed
+        seed=payload['params']['seed']
     )
+
+    start_time = datetime.now()
     result = await local_run(
         num_jobs=payload_data.num_jobs,
         num_tors=payload_data.num_tors,
         n_cores=payload_data.n_cores,
         ring_size=payload_data.ring_size,
         routing=payload_data.routing,
-        seed=seed
+        seed=payload_data.seed
     )
+    end_time = datetime.now()
     # check if parameters allow
     print(result)
     if result == "You can`t create simulation with your parameters":
@@ -54,12 +56,13 @@ async def run_simulation(request: Request):
 
         simulation = {
             "simulation_name": str(simulation_data.simulation_name),
-            # "datas":list(datas),
             "path": "",
             "date": current_date,
-            "params": str(payload_data.num_jobs) + "," + str(payload_data.n_cores) + "," + str(payload_data.ring_size) + "," + str(payload_data.routing),
+            "params": str(payload_data.num_jobs) + "," + str(payload_data.n_cores) + "," + str(payload_data.ring_size) + "," + str(payload_data.routing) + "," + str(payload_data.seed),
             "user_id": str(payload['user_id']),
-            "result": result
+            "result": result,
+            "start_time": start_time.isoformat(),
+            "end_time": end_time.isoformat()
         }
         await insertSimulation(simulation)
         simulations1 = await popSimulation(str(payload['user_id']))
